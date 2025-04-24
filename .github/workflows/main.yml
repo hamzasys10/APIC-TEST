@@ -1,0 +1,65 @@
+name: Deploy APIs via Composite Actions
+
+on:
+  workflow_dispatch:
+    inputs:
+      CheckoutRegex:
+        description: "Tag checkout regex"
+        required: true
+        default: "rel-1.0.0"
+
+env:
+  CONFIG_PATH: deployment-config/uat-deployment-config.yaml
+  PACKAGE_DIR: packaged-apis
+  SHOULD_IT_PASS: true # will be set to false inside actions if failure occurs
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Checkout Code
+        uses: actions/checkout@v4
+
+
+      - name: 🔐 Login to APIC Gateway
+        uses: ./.github/actions/login-apic
+        with:
+          vault-path: kv/apic/devopsCred
+          server-url: api-manager-ui.apicv10dev.adib.co.ae
+
+
+      - name: 🔁 Import User Defined Policies
+        uses: ./.github/actions/import-udp
+        with:
+          configFile: ${{ env.CONFIG_PATH }}
+          packageDir: ${{ env.PACKAGE_DIR }}
+
+      - name: 🛠️ Adjust API Properties
+        uses: ./.github/actions/adjust-api-props
+        with:
+          configFile: ${{ env.CONFIG_PATH }}
+          packageDir: ${{ env.PACKAGE_DIR }}
+          vaultExtPath: kv/apic/UAT-extSecrets
+          vaultIntPath: kv/apic/UAT-intSecrets
+
+      - name: 🚀 Push the APIs
+        uses: ./.github/actions/push-apis
+        with:
+          configFile: ${{ env.CONFIG_PATH }}
+          packageDir: ${{ env.PACKAGE_DIR }}
+
+      - name: 📢 Publish the Product
+        uses: ./.github/actions/publish-product
+        with:
+          configFile: ${{ env.CONFIG_PATH }}
+          packageDir: ${{ env.PACKAGE_DIR }}
+
+      - name: 🟢 Promote to Production
+        uses: ./.github/actions/promote-to-prod
+        with:
+          configFile: ${{ env.CONFIG_PATH }}
+          packageDir: ${{ env.PACKAGE_DIR }}
+          user: ${{ secrets.ARTIFACTORY_USER }}
+          token: ${{ secrets.ARTIFACTORY_TOKEN }}
+          shouldItPass: ${{ env.SHOULD_IT_PASS }}
