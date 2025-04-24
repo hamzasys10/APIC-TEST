@@ -29,37 +29,37 @@ jobs:
           server-url: api-manager-ui.apicv10dev.adib.co.ae
 
 
-      - name: 🔁 Import User Defined Policies
-        uses: ./.github/actions/import-udp
-        with:
-          configFile: ${{ env.CONFIG_PATH }}
-          packageDir: ${{ env.PACKAGE_DIR }}
+# #      - name: 🔁 Import User Defined Policies
+#         uses: ./.github/actions/import-udp
+#         with:
+#           configFile: ${{ env.CONFIG_PATH }}
+#           packageDir: ${{ env.PACKAGE_DIR }}
 
-      - name: 🛠️ Adjust API Properties
-        uses: ./.github/actions/adjust-api-props
-        with:
-          configFile: ${{ env.CONFIG_PATH }}
-          packageDir: ${{ env.PACKAGE_DIR }}
-          vaultExtPath: kv/apic/UAT-extSecrets
-          vaultIntPath: kv/apic/UAT-intSecrets
+#       - name: 🛠️ Adjust API Properties
+#         uses: ./.github/actions/adjust-api-props
+#         with:
+#           configFile: ${{ env.CONFIG_PATH }}
+#           packageDir: ${{ env.PACKAGE_DIR }}
+#           vaultExtPath: kv/apic/UAT-extSecrets
+#           vaultIntPath: kv/apic/UAT-intSecrets
 
-      - name: 🚀 Push the APIs
-        uses: ./.github/actions/push-apis
-        with:
-          configFile: ${{ env.CONFIG_PATH }}
-          packageDir: ${{ env.PACKAGE_DIR }}
+#       - name: 🚀 Push the APIs
+#         uses: ./.github/actions/push-apis
+#         with:
+#           configFile: ${{ env.CONFIG_PATH }}
+#           packageDir: ${{ env.PACKAGE_DIR }}
 
-      - name: 📢 Publish the Product
-        uses: ./.github/actions/publish-product
-        with:
-          configFile: ${{ env.CONFIG_PATH }}
-          packageDir: ${{ env.PACKAGE_DIR }}
+#       - name: 📢 Publish the Product
+#         uses: ./.github/actions/publish-product
+#         with:
+#           configFile: ${{ env.CONFIG_PATH }}
+#           packageDir: ${{ env.PACKAGE_DIR }}
 
-      - name: 🟢 Promote to Production
-        uses: ./.github/actions/promote-to-prod
-        with:
-          configFile: ${{ env.CONFIG_PATH }}
-          packageDir: ${{ env.PACKAGE_DIR }}
-          user: ${{ secrets.ARTIFACTORY_USER }}
-          token: ${{ secrets.ARTIFACTORY_TOKEN }}
-          shouldItPass: ${{ env.SHOULD_IT_PASS }}
+#       - name: 🟢 Promote to Production
+#         uses: ./.github/actions/promote-to-prod
+#         with:
+#           configFile: ${{ env.CONFIG_PATH }}
+#           packageDir: ${{ env.PACKAGE_DIR }}
+#           user: ${{ secrets.ARTIFACTORY_USER }}
+#           token: ${{ secrets.ARTIFACTORY_TOKEN }}
+#           shouldItPass: ${{ env.SHOULD_IT_PASS }}
