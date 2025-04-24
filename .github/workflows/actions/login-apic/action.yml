@@ -1,0 +1,20 @@
+name: 'Login to APIC Gateway'
+description: 'Login to APIC'
+
+inputs:
+  vaultPath:
+    description: 'Vault path'
+    required: true
+  server:
+    description: 'Server you want to login'
+    required: false
+    default: 'api-manager-ui.apicv10dev.adib.co.ae'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Run login logic
+      shell: bash
+      run: |
+        chmod +x "${{ github.action_path }}/entrypoint.sh"
+        "${{ github.action_path }}/entrypoint.sh" "${{ inputs.vaultPath }}" "${{ inputs.server }}"
