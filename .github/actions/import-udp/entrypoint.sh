@@ -20,7 +20,7 @@ for api in $apis; do
   
   
 
- if [["$deploy_status"]]; then
+ if [[ "$deploy_status" == "true" ]]; then
   type="ExternalAPIs"
   [[ "$org" == *"adibint"* ]] && type="InternalAPIs"
 
