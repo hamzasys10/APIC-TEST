@@ -10,5 +10,6 @@ runs:
   steps:
     - shell: bash
       run: |
+        set -e
         chmod +x "${{ github.action_path }}/entrypoint.sh"
         "${{ github.action_path }}/entrypoint.sh" "${{ inputs.configFile }}" "${{ inputs.packageDir }}" "${{ github.workspace }}"
