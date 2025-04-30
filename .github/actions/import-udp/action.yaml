@@ -11,4 +11,4 @@ runs:
     - shell: bash
       run: |
         chmod +x "${{ github.action_path }}/entrypoint.sh"
-        "${{ github.action_path }}/entrypoint.sh" "${{ inputs.configFile }}" "${{ inputs.packageDir }}" "${{ GITHUB_WORKSPACE }}"
+        "${{ github.action_path }}/entrypoint.sh" "${{ inputs.configFile }}" "${{ inputs.packageDir }}" "${{ github.workspace }}"
