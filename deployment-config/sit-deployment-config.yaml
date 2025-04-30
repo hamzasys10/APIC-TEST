@@ -1,0 +1,81 @@
+apis:
+  
+   ntamsserviceapis:
+    Deploy: true 
+    Name: "ntamsserviceapis"
+    ORG: "adib"
+    CAT: "adib"
+    Version: "1.0.0"
+    PreviousVersion: ""
+
+   Dakhili-ntamsserviceapis:
+    Deploy: true 
+    Name: "ntamsserviceapis"
+    ORG: "adibint"
+    CAT: "adibint"
+    Version: "1.0.0"
+    PreviousVersion: ""
+
+   Dakhili-partyserviceapis:
+    Deploy: true 
+    Name: "partyserviceapis"
+    ORG: "adibint"
+    CAT: "adibint"
+    Version: "1.0.3"
+    PreviousVersion: ""
+
+   Dakhili-icsserviceapis:
+    Deploy: true 
+    Name: "icsserviceapis"
+    ORG: "adibint"
+    CAT: "adibint"
+    Version: "1.0.1"
+    PreviousVersion: ""
+
+   Dakhili-cardserviceapis:
+    Deploy: true 
+    Name: "cardserviceapis"
+    ORG: "adibint"
+    CAT: "adibint"
+    Version: "1.0.9"
+    PreviousVersion: ""
+
+   Dakhili-complianceserviceapis:
+    Deploy: true 
+    Name: "complianceserviceapis"
+    ORG: "adibint"
+    CAT: "adibint"
+    Version: "1.0.1"
+    PreviousVersion: ""
+
+   Dakhili-accountsserviceapis:
+    Deploy: true 
+    Name: "accountsserviceapis"
+    ORG: "adibint"
+    CAT: "adibint"
+    Version: "1.0.6"
+    PreviousVersion: ""   
+
+   Dakhili-bpmautomationserviceapis:
+    Deploy: true 
+    Name: "bpmautomationserviceapis"
+    ORG: "adibint"
+    CAT: "adibint"
+    Version: "1.0.1"
+    PreviousVersion: ""   
+
+   Dakhili-partydatamanagementserviceapis:
+    Deploy: true 
+    Name: "partydatamanagementserviceapis"
+    ORG: "adibint"
+    CAT: "adibint"
+    Version: "1.0.1"
+    PreviousVersion: ""
+
+   Dakhili-notificationserviceapis:
+    Deploy: true 
+    Name: "notificationserviceapis"
+    ORG: "adibint"
+    CAT: "adibint"
+    Version: "1.0.3"
+    PreviousVersion: ""

@@ -1,0 +1,20 @@
+name: "Adjust API Properties"
+description: "Zips API folders and uploads them to Artifactory"
+
+inputs:
+  config-file:
+    description: "Path to deployment YAML"
+    required: true
+  build-path:
+    description: "Unique build directory path"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Adjust API Properties
+      shell: bash
+      run: ./entrypoint.sh "${{ inputs.config-file }}" "${{ inputs.build-path }}"
+      env:
+        ARTIFACTORY_USER: ${{ secrets.ARTIFACTORY_USER }}
+        ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}

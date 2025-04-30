@@ -1,0 +1,42 @@
+name: "Download Package from JFrog"
+description: "Downloads an artifact from JFrog using curl"
+inputs:
+  productPath:
+    description: "Path inside JFrog repository (e.g. External/MyAPI)"
+    required: true
+  fileName:
+    description: "Name of the file to download (e.g. MyAPI_1.0.0.zip)"
+    required: true
+  targetDir:
+    description: "Target directory to save the downloaded file"
+    required: true
+  artifactoryUrl:
+    description: "Base URL for JFrog Artifactory"
+    required: false
+    default: "https://jfrog.adib.co.ae/artifactory"
+  repo:
+    description: "Repository name in Artifactory (e.g. APIC)"
+    required: false
+    default: "APIC"
+  user:
+    description: "Artifactory username"
+    required: true
+  token:
+    description: "Artifactory API token/password"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Download artifact via curl
+      shell: bash
+      run: |
+        chmod +x "${{ github.action_path }}/entrypoint.sh"
+        "${{ github.action_path }}/entrypoint.sh" \
+          "${{ inputs.productPath }}" \
+          "${{ inputs.fileName }}" \
+          "${{ inputs.targetDir }}" \
+          "${{ inputs.artifactoryUrl }}" \
+          "${{ inputs.repo }}" \
+          "${{ inputs.user }}" \
+          "${{ inputs.token }}"

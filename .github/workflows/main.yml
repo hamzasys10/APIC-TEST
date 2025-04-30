@@ -9,7 +9,7 @@ on:
         default: "rel-1.0.0"
 
 env:
-  CONFIG_PATH: deployment-config/uat-deployment-config.yaml
+  CONFIG_PATH: deployment-config/sit-deployment-config.yaml
   PACKAGE_DIR: packaged-apis
   SHOULD_IT_PASS: true # will be set to false inside actions if failure occurs
 
@@ -29,11 +29,11 @@ jobs:
           server-url: api-manager-ui.apicv10dev.adib.co.ae
 
 
-# #      - name: 🔁 Import User Defined Policies
-#         uses: ./.github/actions/import-udp
-#         with:
-#           configFile: ${{ env.CONFIG_PATH }}
-#           packageDir: ${{ env.PACKAGE_DIR }}
+      - name: 🔁 Import User Defined Policies
+        uses: ./.github/actions/import-udp
+        with:
+          configFile: ${{ env.CONFIG_PATH }}
+          packageDir: ${{ env.PACKAGE_DIR }}
 
 #       - name: 🛠️ Adjust API Properties
 #         uses: ./.github/actions/adjust-api-props

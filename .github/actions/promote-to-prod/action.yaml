@@ -1,0 +1,41 @@
+name: "Promote Packages to Production"
+description: "Upload packaged artifacts to JFrog for production promotion"
+inputs:
+  configFile:
+    description: "Path to YAML deployment config"
+    required: true
+  packageDir:
+    description: "Package directory"
+    required: true
+  user:
+    description: "Artifactory user"
+    required: true
+  token:
+    description: "Artifactory API token"
+    required: true
+  artifactoryUrl:
+    description: "Artifactory base URL"
+    default: "https://jfrog.adib.co.ae/artifactory"
+    required: false
+  repo:
+    description: "Artifactory repo"
+    default: "APIC"
+    required: false
+  shouldItPass:
+    description: "Boolean string to determine promotion eligibility"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Promote packages to production
+      shell: bash
+      run: |
+        chmod +x "${{ github.action_path }}/entrypoint.sh"
+        "${{ github.action_path }}/entrypoint.sh" \
+          "${{ inputs.configFile }}" \
+          "${{ inputs.packageDir }}" \
+          "${{ inputs.user }}" \
+          "${{ inputs.token }}" \
+          "${{ inputs.artifactoryUrl }}" \
+          "${{ inputs.repo }}" \
+          "${{ inputs.shouldItPass }}"

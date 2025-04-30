@@ -1,0 +1,19 @@
+name: 'Push APIs'
+description: 'Pushes non-catalogProperties API YAMLs to APIC organization'
+inputs:
+  configFile:
+    description: 'Path to deployment YAML'
+    required: true
+  packageDir:
+    description: 'Base package directory'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: Push APIs to APIC org
+      shell: bash
+      run: |
+        chmod +x "${{ github.action_path }}/entrypoint.sh"
+        "${{ github.action_path }}/entrypoint.sh" \
+          "${{ inputs.configFile }}" \
+          "${{ inputs.packageDir }}"

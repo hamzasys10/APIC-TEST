@@ -1,0 +1,19 @@
+name: 'Publish & Replace API Product'
+description: 'Publishes API products and optionally replaces older versions'
+inputs:
+  configFile:
+    description: 'Path to the deployment YAML config file'
+    required: true
+  packageDir:
+    description: 'Path to base API package directory'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: Publish product to APIC
+      shell: bash
+      run: |
+        chmod +x "${{ github.action_path }}/entrypoint.sh"
+        "${{ github.action_path }}/entrypoint.sh" \
+          "${{ inputs.configFile }}" \
+          "${{ inputs.packageDir }}"
