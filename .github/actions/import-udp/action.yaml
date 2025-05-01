@@ -15,7 +15,7 @@ runs:
         SERVER: api-manager-ui.apicv10dev.adib.co.ae
         GITHUB_WORKSPACE: ${{ github.workspace }}
       run: |
-        -euo pipefail
+        set -euo pipefail
         echo "📖 Reading API config from: $CONFIG"
         apis=$(yq eval '.apis | keys' "$CONFIG" | sed 's/- //g')
 
@@ -26,7 +26,7 @@ runs:
           version=$(yq eval ".apis[\"$api\"].Version" "$CONFIG")
           deploy_status=$(yq eval ".apis[\"$api\"].Deploy" "$CONFIG")
 
-          if [[ "$deploy_status" == "true"]]; then
+          if [["$deploy_status"]]; then
             type="ExternalAPIs"
             [[ "$org" == *"adibint"* ]] && type="InternalAPIs"
 
