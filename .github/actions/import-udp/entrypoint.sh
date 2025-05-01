@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+-euo pipefail
 
 CONFIG="$1"
 PACKAGE_DIR="$2"

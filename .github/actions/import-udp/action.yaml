@@ -26,7 +26,7 @@ runs:
           version=$(yq eval ".apis[\"$api\"].Version" "$CONFIG")
           deploy_status=$(yq eval ".apis[\"$api\"].Deploy" "$CONFIG")
 
-          if [["$deploy_status"]]; then
+          if [[ "$deploy_status" == "true"]]; then
             type="ExternalAPIs"
             [[ "$org" == *"adibint"* ]] && type="InternalAPIs"
 
