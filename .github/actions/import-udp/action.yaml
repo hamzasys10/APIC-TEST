@@ -15,7 +15,7 @@ runs:
         SERVER: api-manager-ui.apicv10dev.adib.co.ae
         GITHUB_WORKSPACE: ${{ github.workspace }}
       run: |
-        set -e
+        -euo pipefail
         echo "📖 Reading API config from: $CONFIG"
         apis=$(yq eval '.apis | keys' "$CONFIG" | sed 's/- //g')
 
