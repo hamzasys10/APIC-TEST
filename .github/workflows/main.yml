@@ -35,13 +35,13 @@ jobs:
           configFile: ${{ env.CONFIG_PATH }}
           packageDir: ${{ env.PACKAGE_DIR }}
 
-#       - name: 🛠️ Adjust API Properties
-#         uses: ./.github/actions/adjust-api-props
-#         with:
-#           configFile: ${{ env.CONFIG_PATH }}
-#           packageDir: ${{ env.PACKAGE_DIR }}
-#           vaultExtPath: kv/apic/UAT-extSecrets
-#           vaultIntPath: kv/apic/UAT-intSecrets
+      - name: 🛠️ Adjust API Properties
+        uses: ./.github/actions/adjust-api-props
+        with:
+          configFile: ${{ env.CONFIG_PATH }}
+          packageDir: ${{ env.PACKAGE_DIR }}
+          vaultExtPath: kv/apic/UAT-extSecrets
+          vaultIntPath: kv/apic/UAT-intSecrets
 
 #       - name: 🚀 Push the APIs
 #         uses: ./.github/actions/push-apis

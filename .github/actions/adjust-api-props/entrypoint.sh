@@ -29,20 +29,23 @@ for api in $apis; do
   zipName="${apiName}_${version}.zip"
   zipPath="$GITHUB_WORKSPACE/$BUILD_PATH/APIs/$path/$zipName"
 
-  echo "📁 Zipping: $filesPath → $zipPath"
-  cd "$filesPath"
-  zip -r "$zipPath" . > /dev/null
+  # echo "📁 Zipping: $filesPath → $zipPath"
+  # cd "$filesPath"
+  # zip -r "$zipPath" . > /dev/null
 
   echo "📦 Uploading to Artifactory..."
 
   if [[ "$path" == "ExternalAPIs" ]]; then
-    curl -u "${ARTIFACTORY_USER}:${ARTIFACTORY_PASSWORD}" -T "$zipPath" \
-      "https://your-artifactory-server/artifactory/APIC/v10/External/${apiName}/${zipName}"
+
+  echo 'uploading it External'
+    # curl -u "${ARTIFACTORY_USER}:${ARTIFACTORY_PASSWORD}" -T "$zipPath" \
+    #   "https://your-artifactory-server/artifactory/APIC/v10/External/${apiName}/${zipName}"
   else
-    curl -u "${ARTIFACTORY_USER}:${ARTIFACTORY_PASSWORD}" -T "$zipPath" \
-      "https://your-artifactory-server/artifactory/APIC/v10/Internal/${apiName}/${zipName}"
+  echo 'uploading to internal'
+    # curl -u "${ARTIFACTORY_USER}:${ARTIFACTORY_PASSWORD}" -T "$zipPath" \
+    #   "https://your-artifactory-server/artifactory/APIC/v10/Internal/${apiName}/${zipName}"
   fi
 
   echo "✅ Uploaded and cleaning up"
-  rm -f "$zipPath"
+  # rm -f "$zipPath"
 done
