@@ -85,44 +85,45 @@ for api in $apis; do
     continue
   fi
    
-  source ~/.bash_profile > /dev/null 2>&1
-  if /home/ucdadmin/apic-v10-5.2-sit/apic products:publish $productFile --server $SERVER --org $org --catalog $org --migrate_subscriptions; then
-    echo "✅ Published $name"
-  else
-    echo "❌ Failed to publish $name"
-  fi
+  # source ~/.bash_profile > /dev/null 2>&1
+  # if /home/ucdadmin/apic-v10-5.2-sit/apic products:publish $productFile --server $SERVER --org $org --catalog $org --migrate_subscriptions; then
+  #   echo "✅ Published $name"
+  # else
+  #   echo "❌ Failed to publish $name"
+  # fi
 
 
 
   if [[ -n "$prevVersion" != "" ]]; then
 
-      PRODUCT_LIST=$(cd "$GITHUB_WORKSPACE/$BUILD_PATH/APIs/$path" \
-      && /home/ucdadmin/apic-v10-5.2-sit/apic products:list \
-       --server "$SERVER" \
-       --org "$org" \
-       --catalog "$cat" \
-       --scope catalog "$name"
-      )
+      echo $prevVersion
+      # PRODUCT_LIST=$(cd "$GITHUB_WORKSPACE/$BUILD_PATH/APIs/$path" \
+      # && /home/ucdadmin/apic-v10-5.2-sit/apic products:list \
+      #  --server "$SERVER" \
+      #  --org "$org" \
+      #  --catalog "$cat" \
+      #  --scope catalog "$name"
+      # )
 
-   PRODUCT_LIST=$(echo "$PRODUCT_LIST" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
+  #  PRODUCT_LIST=$(echo "$PRODUCT_LIST" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
 
-   echo "Captured PRODUCT_LIST:"
-   echo "$PRODUCT_LIST"
+  #  echo "Captured PRODUCT_LIST:"
+  #  echo "$PRODUCT_LIST"
 
-   generateProductMapFile "$PRODUCT_LIST"  "$name:$prevVersion"  "$GITHUB_WORKSPACE/$BUILD_PATH/deployment-config/"
+  #  generateProductMapFile "$PRODUCT_LIST"  "$name:$prevVersion"  "$GITHUB_WORKSPACE/$BUILD_PATH/deployment-config/"
    
 
-   COMMAND_OUTPUT=$(
-  /home/ucdadmin/apic-v10-5.2-sit/apic products:replace \
-    --server "$SERVER" \
-    --org    "$org" \
-    --catalog "$cat" \
-    --scope  "catalog $name:$prevVersion" \
-    "$GITHUB_WORKSPACE/$BUILD_PATH/deployment-config/productsmap.yaml"
-  )
+  #  COMMAND_OUTPUT=$(
+  # /home/ucdadmin/apic-v10-5.2-sit/apic products:replace \
+  #   --server "$SERVER" \
+  #   --org    "$org" \
+  #   --catalog "$cat" \
+  #   --scope  "catalog $name:$prevVersion" \
+  #   "$GITHUB_WORKSPACE/$BUILD_PATH/deployment-config/productsmap.yaml"
+  # )
 
-    COMMAND_OUTPUT=$(echo "$COMMAND_OUTPUT" \
-  | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
+  #   COMMAND_OUTPUT=$(echo "$COMMAND_OUTPUT" \
+  # | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
 
     echo "🚀 Replace output: $COMMAND_OUTPUT"
    

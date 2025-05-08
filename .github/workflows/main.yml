@@ -49,11 +49,11 @@ jobs:
           configFile: ${{ env.CONFIG_PATH }}
           packageDir: ${{ env.PACKAGE_DIR }}
 
-#       - name: 📢 Publish the Product
-#         uses: ./.github/actions/publish-product
-#         with:
-#           configFile: ${{ env.CONFIG_PATH }}
-#           packageDir: ${{ env.PACKAGE_DIR }}
+      - name: 📢 Publish the Product
+        uses: ./.github/actions/publish-product
+        with:
+          configFile: ${{ env.CONFIG_PATH }}
+          packageDir: ${{ env.PACKAGE_DIR }}
 
 #       - name: 🟢 Promote to Production
 #         uses: ./.github/actions/promote-to-prod

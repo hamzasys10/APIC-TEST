@@ -1,0 +1,5 @@
+---
+product_url: https://platform-api.apicv10dev.adib.co.ae/api/catalogs/27e6aa48-8cd3-4643-ab5d-e48b3ea05432/ae825d1b-35b2-4824-81dc-34cb58976140/products/a2c54645-b2f3-411c-bd45-086e30905d44
+plans:
+- source: default
+  target: default
