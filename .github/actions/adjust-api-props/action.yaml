@@ -16,7 +16,7 @@ runs:
       shell: bash
       run: |
         chmod +x "${{ github.action_path }}/entrypoint.sh"
-        "${{ github.action_path }}/entrypoint.sh" "${{ inputs.vaultPath }}" "${{ inputs.server }}"
+        "${{ github.action_path }}/entrypoint.sh" "${{ inputs.configFile }}" "${{ inputs.build-path }}"
       # env:
       #   ARTIFACTORY_USER: ${{ secrets.ARTIFACTORY_USER }}
       #   ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
