@@ -14,7 +14,9 @@ runs:
   steps:
     - name: Adjust API Properties
       shell: bash
-      run: ./entrypoint.sh "${{ inputs.config-file }}" "${{ inputs.build-path }}"
+      run: |
+        chmod +x "${{ github.action_path }}/entrypoint.sh"
+        "${{ github.action_path }}/entrypoint.sh" "${{ inputs.vaultPath }}" "${{ inputs.server }}"
       # env:
       #   ARTIFACTORY_USER: ${{ secrets.ARTIFACTORY_USER }}
       #   ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
