@@ -15,6 +15,6 @@ runs:
     - name: Adjust API Properties
       shell: bash
       run: ./entrypoint.sh "${{ inputs.config-file }}" "${{ inputs.build-path }}"
-      env:
-        ARTIFACTORY_USER: ${{ secrets.ARTIFACTORY_USER }}
-        ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
+      # env:
+      #   ARTIFACTORY_USER: ${{ secrets.ARTIFACTORY_USER }}
+      #   ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
