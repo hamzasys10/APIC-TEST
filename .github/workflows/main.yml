@@ -11,7 +11,7 @@ on:
 env:
   CONFIG_PATH: deployment-config/sit-deployment-config.yaml
   PACKAGE_DIR: packaged-apis
-  SHOULD_IT_PASS: true # will be set to false inside actions if failure occurs
+
 
 jobs:
   deploy:
