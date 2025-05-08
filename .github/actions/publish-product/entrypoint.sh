@@ -5,6 +5,8 @@ CONFIG="$1"
 BUILD_PATH="$2"
 SERVER="api-manager-ui.apicv10dev.adib.co.ae"
 
+
+echo "📖 Reading API config from: $CONFIG"
 apis=$(yq eval '.apis | keys' "$CONFIG" | sed 's/- //g')
 
 getApiType() {
