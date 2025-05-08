@@ -94,7 +94,7 @@ for api in $apis; do
 
 
 
-  if [[ -n "$prevVersion" != "" ]]; then
+  if [[ "$prevVersion" != "" ]]; then
 
       echo $prevVersion
       # PRODUCT_LIST=$(cd "$GITHUB_WORKSPACE/$BUILD_PATH/APIs/$path" \
