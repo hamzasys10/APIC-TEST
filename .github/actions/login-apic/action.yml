@@ -19,8 +19,8 @@ runs:
         method: token
         token: ${{ inputs.vault_secret }}
         secrets: |
-         '${{ vaultPath }}' username | user_name
-         '${{ vaultPath }}' password | password
+         '${{ inputs.vaultPath }}' username | user_name
+         '${{ inputs.vaultPath }}' password | password
 
         tlsSkipVerify: true
     - name: Run login logic
