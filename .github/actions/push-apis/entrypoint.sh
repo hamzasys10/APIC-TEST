@@ -60,13 +60,14 @@ for api in $apis; do
   type=$(getApiType "$org")
   apiAndVersion="${apiName}_${version}"
   filesPath=$GITHUB_WORKSPACE/$BUILD_PATH/APIs/$type/$apiName
+  echo $filesPath
   deploy=$(yq eval ".apis[\"$api\"].Deploy" "$CONFIG_FILE")
   if [[ "$deploy" != "true" ]]; then
     echo "⏭️ Skipping $api (Deploy=false)"
     continue
   fi
   echo "📄 Processing: $apiName (type=$type)"
-  if ! pushApis "$filesPath" "$org" "$version"; then
-    echo "❌ Error: push failed for $apiName"
-  fi
+  # if ! pushApis "$filesPath" "$org" "$version"; then
+  #   echo "❌ Error: push failed for $apiName"
+  # fi
 done
