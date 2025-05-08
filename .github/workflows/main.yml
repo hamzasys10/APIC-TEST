@@ -25,7 +25,7 @@ jobs:
       - name: 🔐 Login to APIC Gateway
         uses: ./.github/actions/login-apic
         with:
-          vault-path: kv/apic/devopsCred
+          vault-path: kv/data/apic/devopsCred
           server-url: api-manager-ui.apicv10dev.adib.co.ae
 
 
@@ -40,8 +40,8 @@ jobs:
         with:
           configFile: ${{ env.CONFIG_PATH }}
           packageDir: ${{ env.PACKAGE_DIR }}
-          vaultExtPath: kv/apic/UAT-extSecrets
-          vaultIntPath: kv/apic/UAT-intSecrets
+          vaultExtPath: kv/data/apic/UAT-extSecrets
+          vaultIntPath: kv/data/apic/UAT-intSecrets
 
 #       - name: 🚀 Push the APIs
 #         uses: ./.github/actions/push-apis

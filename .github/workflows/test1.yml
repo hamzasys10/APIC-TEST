@@ -1,0 +1,29 @@
+name: Owais test
+
+on:
+  workflow_dispatch:
+    inputs:
+      CheckoutRegex:
+        description: "Tag checkout regex"
+        required: true
+        default: "rel-1.0.0"
+
+env:
+  CONFIG_PATH: deployment-config/sit-deployment-config.yaml
+  PACKAGE_DIR: packaged-apis
+  SHOULD_IT_PASS: true # will be set to false inside actions if failure occurs
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Checkout Code
+        uses: actions/checkout@v4
+
+
+      - name: 🔐 Login to APIC Gateway
+        uses: ./.github/actions/login-apic
+        with:
+          vault-path: kv/data/apic/devopsCred
+          server-url: api-manager-ui.apicv10dev.adib.co.ae

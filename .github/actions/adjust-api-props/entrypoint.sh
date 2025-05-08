@@ -38,11 +38,11 @@ for api in $apis; do
   if [[ "$path" == "ExternalAPIs" ]]; then
 
   echo 'uploading it External'
-    # curl -u "${ARTIFACTORY_USER}:${ARTIFACTORY_PASSWORD}" -T "$zipPath" \
+    # curl -u "${GIT_USER}:${GIT_TOKEN}" -T "$zipPath" \
     #   "https://your-artifactory-server/artifactory/APIC/v10/External/${apiName}/${zipName}"
   else
   echo 'uploading to internal'
-    # curl -u "${ARTIFACTORY_USER}:${ARTIFACTORY_PASSWORD}" -T "$zipPath" \
+    # curl -u "${GIT_USER}:${GIT_TOKEN}" -T "$zipPath" \
     #   "https://your-artifactory-server/artifactory/APIC/v10/Internal/${apiName}/${zipName}"
   fi
 

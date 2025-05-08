@@ -2,8 +2,10 @@ name: Import All UDP Policies
 description: Loops over APIs and imports UDPs
 inputs:
   configFile:
+    description: "config path"
     required: true
   packageDir:
+    description: "package directory"
     required: true
 runs:
   using: composite
