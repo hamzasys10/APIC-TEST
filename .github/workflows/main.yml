@@ -25,8 +25,9 @@ jobs:
       - name: 🔐 Login to APIC Gateway
         uses: ./.github/actions/login-apic
         with:
-          vault-path: kv/data/apic/devopsCred
-          server-url: api-manager-ui.apicv10dev.adib.co.ae
+          vaultPath: kv/data/apic/devopsCred
+          server: api-manager-ui.apicv10dev.adib.co.ae
+          vault_secret: ${{ secrets.GIT_TOKEN}}
 
 
       - name: 🔁 Import User Defined Policies
