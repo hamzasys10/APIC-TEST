@@ -22,12 +22,12 @@ jobs:
         uses: actions/checkout@v4
 
 
-      - name: 🔐 Login to APIC Gateway
-        uses: ./.github/actions/login-apic
-        with:
-          vaultPath: kv/data/apic/devopsCred
-          server: api-manager-ui.apicv10dev.adib.co.ae
-          vault_secret: ${{ secrets.GIT_TOKEN}}
+      # - name: 🔐 Login to APIC Gateway
+      #   uses: ./.github/actions/login-apic
+      #   with:
+      #     vaultPath: kv/data/apic/devopsCred
+      #     server: api-manager-ui.apicv10dev.adib.co.ae
+      #     vault_secret: ${{ secrets.GIT_TOKEN}}
 
 
       - name: 🔁 Import User Defined Policies
