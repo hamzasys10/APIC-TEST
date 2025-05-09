@@ -1,0 +1,30 @@
+name: 'Login to APIC Gateway'
+description: 'login to APIC'
+inputs:
+  vaultPath:
+    description: 'vault path'
+    required: true
+  server:
+    description: 'server you want to login'
+    default: 'api-manager-ui.apicv10dev.adib.co.ae'
+  vault_secret:
+    description: 'server you want to login'
+runs:
+  using: 'composite'
+  steps:
+    - name: Import Secrets from Vault
+      uses: ADIB-DevOps/vault-action@v2
+      with:
+        url: https://azvault.adib.co.ae/
+        method: token
+        token: ${{ inputs.vault_secret }}
+        secrets: |
+         '${{ inputs.vaultPath }}' username | user_name
+         '${{ inputs.vaultPath }}' password | password
+
+        tlsSkipVerify: true
+    - name: Run login logic
+      shell: bash
+      run: |
+        chmod +x "${{ github.action_path }}/entrypoint.sh"
+        "${{ github.action_path }}/entrypoint.sh" "${{ inputs.server }}" "${user_name} "${password}" 

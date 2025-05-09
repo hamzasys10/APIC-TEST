@@ -55,11 +55,8 @@ jobs:
           configFile: ${{ env.CONFIG_PATH }}
           packageDir: ${{ env.PACKAGE_DIR }}
 
-#       - name: 🟢 Promote to Production
-#         uses: ./.github/actions/promote-to-prod
-#         with:
-#           configFile: ${{ env.CONFIG_PATH }}
-#           packageDir: ${{ env.PACKAGE_DIR }}
-#           user: ${{ secrets.ARTIFACTORY_USER }}
-#           token: ${{ secrets.ARTIFACTORY_TOKEN }}
-#           shouldItPass: ${{ env.SHOULD_IT_PASS }}
+      - name: 🔐 Logout to APIC Gateway
+        uses: ./.github/actions/logout-apic
+        with:
+          server: api-manager-ui.apicv10dev.adib.co.ae
+
