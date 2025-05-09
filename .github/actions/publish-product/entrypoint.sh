@@ -12,7 +12,7 @@ echo "📖 Reading API config from: $CONFIG"
 
 cat $CONFIG
 ls
-apis=$(yq eval '.apis | keys | .[]' "$CONFIG")
+apis=$(yq eval '.apis | keys | .[]' "deployment-config/sit-deployment-config.yaml")
 for api in $apis; do
 
   deploy=$(yq eval ".apis[\"$api\"].Deploy" "$CONFIG_FILE")
