@@ -62,7 +62,7 @@ echo "✅ Updated $YAML_FILE with product_url: $URL"
 # apis=$(yq eval '.apis | keys' "$CONFIG" | sed 's/- //g')
 
 cat $CONFIG
-
+apis=$(yq eval '.apis | keys | .[]' "$CONFIG_FILE")
 for api in $apis; do
 
   deploy=$(yq eval ".apis[\"$api\"].Deploy" "$CONFIG_FILE")
