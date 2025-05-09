@@ -11,7 +11,7 @@ echo "📖 Reading API config from: $CONFIG"
 # apis=$(yq eval '.apis | keys' "$CONFIG" | sed 's/- //g')
 
 getApiType() {
-  [[ "$1" == *"adibint"* ]] && echo "InternalAPIs" || echo "ExternalAPIs"
+ if [[ "$1" == *"adibint"* ]] && echo "InternalAPIs" || echo "ExternalAPIs"
 }
 
 
