@@ -8,11 +8,6 @@ SERVER="api-manager-ui.apicv10dev.adib.co.ae"
 
 echo "📖 Reading API config from: $CONFIG"
 
-
-
-apis=$(yq eval '.apis | keys' "$CONFIG" | sed 's/- //g')
-
-
 getApiType() {
   [[ "$1" == *"adibint"* ]] && echo "InternalAPIs" || echo "ExternalAPIs"
 }
@@ -64,7 +59,7 @@ echo "✅ Updated $YAML_FILE with product_url: $URL"
 
 }
 
-
+apis=$(yq eval '.apis | keys' "$CONFIG" | sed 's/- //g')
 
 for api in $apis; do
 
