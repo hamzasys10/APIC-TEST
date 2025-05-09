@@ -11,7 +11,7 @@ echo "📖 Reading API config from: $CONFIG"
 # apis=$(yq eval '.apis | keys' "$CONFIG" | sed 's/- //g')
 
 getApiType() {
- if [[ "$1" == *"adibint"* ]] && echo "InternalAPIs" || echo "ExternalAPIs"
+ [[ "$1" == *"adibint"* ]] && echo "InternalAPIs" || echo "ExternalAPIs"
 }
 
 
@@ -78,7 +78,7 @@ for api in $apis; do
   version=$(yq eval ".apis[\"$api\"].Version" "$CONFIG")
   prevVersion=$(yq eval ".apis[\"$api\"].PreviousVersion" "$CONFIG")
 
-  type=$(getApiType "$org")
+  path=$(getApiType "$org")
   namever="${name}_${version}"
   filesPath="$GITHUB_WORKSPACE/$BUILD_PATH/APIs/$path/$apiName"
   productFile="$filesPath/$name.yaml"
