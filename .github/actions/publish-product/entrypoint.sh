@@ -11,8 +11,7 @@ echo "📖 Reading API config from: $CONFIG"
 # apis=$(yq eval '.apis | keys' "$CONFIG" | sed 's/- //g')
 
 cat $CONFIG
-apis=$(yq eval '.apis | keys | .[]' "$CONFIG_FILE")
-echo 'below'
+apis=$(yq eval '.apis | keys | .[]' "$CONFIG")
 for api in $apis; do
 
   deploy=$(yq eval ".apis[\"$api\"].Deploy" "$CONFIG_FILE")
