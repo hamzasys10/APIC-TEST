@@ -10,6 +10,58 @@ echo "📖 Reading API config from: $CONFIG"
 
 # apis=$(yq eval '.apis | keys' "$CONFIG" | sed 's/- //g')
 
+getApiType() {
+  [[ "$1" == *"adibint"* ]] && echo "InternalAPIs" || echo "ExternalAPIs"
+}
+
+
+generateProductMapFile(){
+
+PRODUCT_LIST="$1"
+PREVIOUS_API="$2"
+DIR_PATH="$3"
+
+
+
+
+URL=""  # will hold the substring after CUSTOM_KEY
+
+# Iterate each line of PRODUCT_LIST
+while IFS= read -r line; do
+
+# Build the custom key: PREVIOUS_API + [state:published], then strip ALL whitespace
+CUSTOM_KEY="${PREVIOUS_API}[state:published]"
+CUSTOM_KEY="$(echo "$CUSTOM_KEY" | tr -d '[:space:]')"
+  # Remove _all_ whitespace (spaces, tabs, etc.)
+  clean_line="$(echo "$line" | tr -d '[:space:]')"
+
+  # If the cleaned line contains our key, grab what comes _after_ it
+  if [[ "$clean_line" == *"$CUSTOM_KEY"* ]]; then
+    URL="${clean_line#*"$CUSTOM_KEY"}"
+    break
+  fi
+done <<< "$PRODUCT_LIST"
+
+echo "🔍 Found product URL: $URL"
+
+# Normalize the YAML filename
+# (remove any trailing slash on DIR_PATH, then append productsmap.yaml)
+YAML_FILE="${DIR_PATH%/}/productsmap.yaml"
+
+# Verify yq is available
+if ! command -v yq &> /dev/null; then
+  echo "❌ yq not found. Please install mikefarah yq v4+"
+  exit 1
+fi
+
+# Update (or create) the .product_url field in your YAML
+yq eval --inplace ".product_url = \"$URL\"" "$YAML_FILE"
+
+echo "✅ Updated $YAML_FILE with product_url: $URL"
+
+}
+
+
 cat $CONFIG
 ls
 apis=$(yq eval '.apis | keys | .[]' "deployment-config/sit-deployment-config.yaml")
@@ -88,53 +140,3 @@ done
 
 
 #Functions 
-getApiType() {
-  [[ "$1" == *"adibint"* ]] && echo "InternalAPIs" || echo "ExternalAPIs"
-}
-
-
-generateProductMapFile(){
-
-PRODUCT_LIST="$1"
-PREVIOUS_API="$2"
-DIR_PATH="$3"
-
-
-
-
-URL=""  # will hold the substring after CUSTOM_KEY
-
-# Iterate each line of PRODUCT_LIST
-while IFS= read -r line; do
-
-# Build the custom key: PREVIOUS_API + [state:published], then strip ALL whitespace
-CUSTOM_KEY="${PREVIOUS_API}[state:published]"
-CUSTOM_KEY="$(echo "$CUSTOM_KEY" | tr -d '[:space:]')"
-  # Remove _all_ whitespace (spaces, tabs, etc.)
-  clean_line="$(echo "$line" | tr -d '[:space:]')"
-
-  # If the cleaned line contains our key, grab what comes _after_ it
-  if [[ "$clean_line" == *"$CUSTOM_KEY"* ]]; then
-    URL="${clean_line#*"$CUSTOM_KEY"}"
-    break
-  fi
-done <<< "$PRODUCT_LIST"
-
-echo "🔍 Found product URL: $URL"
-
-# Normalize the YAML filename
-# (remove any trailing slash on DIR_PATH, then append productsmap.yaml)
-YAML_FILE="${DIR_PATH%/}/productsmap.yaml"
-
-# Verify yq is available
-if ! command -v yq &> /dev/null; then
-  echo "❌ yq not found. Please install mikefarah yq v4+"
-  exit 1
-fi
-
-# Update (or create) the .product_url field in your YAML
-yq eval --inplace ".product_url = \"$URL\"" "$YAML_FILE"
-
-echo "✅ Updated $YAML_FILE with product_url: $URL"
-
-}
