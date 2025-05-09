@@ -80,7 +80,7 @@ for api in $apis; do
 
   path=$(getApiType "$org")
   namever="${name}_${version}"
-  filesPath="$GITHUB_WORKSPACE/$BUILD_PATH/APIs/$path/$apiName"
+  filesPath="$GITHUB_WORKSPACE/$BUILD_PATH/APIs/$path/$name"
   productFile="$filesPath/$name.yaml"
 
   echo "📦 Publishing product: $productFile"
