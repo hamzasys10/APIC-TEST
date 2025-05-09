@@ -15,7 +15,7 @@ ls
 apis=$(yq eval '.apis | keys | .[]' "deployment-config/sit-deployment-config.yaml")
 for api in $apis; do
 
-  deploy=$(yq eval ".apis[\"$api\"].Deploy" "$CONFIG_FILE")
+  deploy=$(yq eval ".apis[\"$api\"].Deploy" "$CONFIG")
   if [[ "$deploy" != "true" ]]; then
     echo "⏭️ Skipping $api (Deploy=false)"
     continue
