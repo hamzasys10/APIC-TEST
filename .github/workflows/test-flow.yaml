@@ -14,7 +14,7 @@ jobs:
       - name: SSH into Host via password
         uses: garygrossgarten/github-action-ssh@release
         with:
-          host: 172.17.0.1
+          host: 192.168.76.18
           username: hamza.asad
           password: Neon3476234762@@@@
           command: |
