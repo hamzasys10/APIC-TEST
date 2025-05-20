@@ -17,7 +17,7 @@ jobs:
           echo "Trying to SSH into host VM from container..."
 
           # Optional: Add host key to known_hosts to avoid prompt
-          ssh-keyscan 127.0.0.1 >> ~/home/hamza.asad/.ssh/known_hosts
+          ssh-keyscan 127.0.0.1 >> /home/hamza.asad/.ssh/known_hosts
 
           # Run a simple command like `hostname` or `uptime` on the host
           ssh "hamza.asad@127.0.0.1" "echo '✅ SSH Success! Hostname is:' && hostname && uptime"
