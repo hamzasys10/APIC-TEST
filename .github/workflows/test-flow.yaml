@@ -12,9 +12,9 @@ jobs:
 
       - name: Test SSH to Host and Run Command
         env:
-          HOST_USER: your_host_user   # Replace with your actual username on the VM
+          HOST_USER: hamza.asad # Replace with your actual username on the VM
         run: |
           echo "Trying to SSH into host VM from container..."
 
           # Run a simple command like `hostname` or `uptime` on the host
-          ssh "DOCKER_HOST_USERNAME@172.17.0.1" "echo '✅ SSH Success! Hostname is:' && hostname && uptime"
+          ssh "$HOST_USERE@127.0.0.1" "echo '✅ SSH Success! Hostname is:' && hostname && uptime"
