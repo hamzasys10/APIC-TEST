@@ -1,20 +1,23 @@
-name: Test SSH to Host
+name: SSH to Host Machine
 
 on:
   workflow_dispatch:
 
 jobs:
-  ssh-test:
-    runs-on: test-run
+  ssh-job:
+    runs-on: ubuntu-latest
     steps:
-      - name: Print Runner Hostname (Container)
-        run: hostname
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Test SSH to Host and Run Command
-        env:
-          HOST_USER: hamza.asad # Replace with your actual username on the VM
-        run: |
-          echo "Trying to SSH into host VM from container..."
-
-          # Run a simple command like `hostname` or `uptime` on the host
-          ssh "$HOST_USER@192.168.76.18" "echo '✅ SSH Success! Hostname is:' && hostname && uptime"
+      - name: SSH into Host and Run Command
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: 172.17.0.1
+          username: hamza.asad
+          password: Neon3476243762@@@@
+          port: 22
+          script: |
+            echo "✅ Connected to host machine"
+            hostname
+            whoami
