@@ -1,23 +1,23 @@
-name: SSH to Host Machine
+name: SSH Without Docker
 
 on:
   workflow_dispatch:
 
 jobs:
   ssh-job:
-    runs-on: test-run
+    runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: SSH into Host and Run Command
-        uses: appleboy/ssh-action@v0.1.10
+      - name: SSH into Host via password
+        uses: garygrossgarten/github-action-ssh@release
         with:
           host: 172.17.0.1
           username: hamza.asad
-          password: Neon3476243762@@@@
-          port: 22
-          script: |
-            echo "✅ Connected to host machine"
-            hostname
-            whoami
+          password: Neon3476234762@@@@
+          command: |
+            echo "✅ Connected to host"
+            uname -a
+            uptime
