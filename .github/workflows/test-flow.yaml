@@ -5,19 +5,12 @@ on:
 
 jobs:
   ssh-job:
-    runs-on: ubuntu-latest
+    runs-on: test-run
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: SSH into Host via password
-        uses: garygrossgarten/github-action-ssh@release
-        with:
-          host: 192.168.76.18
-          username: hamza.asad
-          password: Neon3476234762@@@@
-          command: |
-            echo "✅ Connected to host"
-            uname -a
-            uptime
+      - name: SSH using password (local self-hosted runner)
+        run: |
+          sshpass -p "Neon3476234762@@@@" ssh -o StrictHostKeyChecking=no hamza.asad@192.168.76.18 "hostname && uptime"
