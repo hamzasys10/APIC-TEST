@@ -1,0 +1,23 @@
+name: Test SSH to Host
+
+on:
+  workflow_dispatch:
+
+jobs:
+  ssh-test:
+    runs-on: test-run
+    steps:
+      - name: Print Runner Hostname (Container)
+        run: hostname
+
+      - name: Test SSH to Host and Run Command
+        env:
+          HOST_USER: your_host_user   # Replace with your actual username on the VM
+        run: |
+          echo "Trying to SSH into host VM from container..."
+
+          # Optional: Add host key to known_hosts to avoid prompt
+          ssh-keyscan 127.0.0.1 >> ~/.ssh/known_hosts
+
+          # Run a simple command like `hostname` or `uptime` on the host
+          ssh "$HOST_USER@127.0.0.1" "echo '✅ SSH Success! Hostname is:' && hostname && uptime"
