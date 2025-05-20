@@ -17,4 +17,4 @@ jobs:
           echo "Trying to SSH into host VM from container..."
 
           # Run a simple command like `hostname` or `uptime` on the host
-          ssh "$HOST_USERE@127.0.0.1" "echo '✅ SSH Success! Hostname is:' && hostname && uptime"
+          ssh "$HOST_USER@127.0.0.1" "echo '✅ SSH Success! Hostname is:' && hostname && uptime"
