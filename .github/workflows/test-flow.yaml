@@ -13,4 +13,4 @@ jobs:
 
       - name: SSH using password (local self-hosted runner)
         run: |
-          sshpass -p "Neon3476234762@@@@" ssh -o StrictHostKeyChecking=no hamza.asad@192.168.76.18 "hostname && uptime"
+          sshpass -p "Neon6617966" ssh -o StrictHostKeyChecking=no hamza.asad@192.168.76.18 "hostname && uptime"
